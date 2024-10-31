@@ -3,8 +3,7 @@ import "./index.css";
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Layout from './components/others/Layout'
 import Home from "./components/pages/Home"
-import About from './components/pages/About'
-import Projects from "./components/pages/Projects";
+import Favorite from './components/pages/Favorite'
 
 
 function App() {
@@ -15,8 +14,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} />
+          <Route path="favorite" element={<Favorite />} />
           </Route>
         </Routes>
       </BrowserRouter>

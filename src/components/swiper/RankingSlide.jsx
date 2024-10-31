@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -12,13 +12,14 @@ function Ranking() {
   const [comingSoonSlider, setComingSoonSlider] = useState(false);
 
   return (
-    <div className="container mx-auto">
-      {/* <div className="max-w-[20rem] md:max-w-[40rem] lg:max-w-[80rem] lg:m-20"> */}
-      <div className="movieChart_btn_wrap m-3">
-        <div className="tapBtn_wrap inline-flex space-x-5">
-          <h3 className="font-work">
+    <div className="bg-slate-100 py-10">
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <div className="inline-flex space-x-3 lg:space-x-5 lg:px-5 p-3  items-center justify-center bg-purple-500 rounded-full drop-shadow-md mb-10">
             <button
-              className={nowShowingSlider ? "text-black" : "text-gray-400"}
+              className={
+                nowShowingSlider ? "text-white" : "text-purple-300"
+              }
               onClick={() => {
                 setNowShowingSlider(true);
                 setComingSoonSlider(false);
@@ -26,11 +27,13 @@ function Ranking() {
             >
               <h2 className="sm:font-2xs ">Now Showing</h2>
             </button>
-          </h3>
-          <p className="secondaryGray text-lg flex align-items-center">|</p>
-          <h3 className="font-work">
+
+            <p className="text-gray-300 text-sm flex align-items-center">|</p>
+
             <button
-              className={comingSoonSlider ? "text-black" : "text-gray-400"}
+              className={
+                comingSoonSlider ? "text-white" : "text-purple-300"
+              }
               onClick={() => {
                 setNowShowingSlider(false);
                 setComingSoonSlider(true);
@@ -39,68 +42,68 @@ function Ranking() {
               {" "}
               <h2>Coming Soon</h2>
             </button>
-          </h3>
+          </div>
         </div>
-        {/* nowShowingSlider */}
-        {nowShowingSlider && (
-          <div className="max-w-[100rem]">
-            {nowShowingSlider}
-            <Swiper
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={"4"}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: false,
-              }}
-              loop={true}
-              pagination={true}
-              modules={[EffectCoverflow, Pagination]}
-            >
-              {NowShowingData.nowShowingMovie.map((movie, index) => (
-                <SwiperSlide key={index}>
-                  <Card movie={movie} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        )}
+        {/* Slider */}
+        <div className="">
+          {/* nowShowingSlider */}
+          {nowShowingSlider && (
+            <div>
+              {nowShowingSlider}
+              <Swiper
+                effect={"coverflow"}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={"4"}
+                coverflowEffect={{
+                  rotate: 0,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: false,
+                }}
+                loop={true}
+                modules={[EffectCoverflow]}
+              >
+                {NowShowingData.nowShowingMovie.map((movie, index) => (
+                  <SwiperSlide key={index}>
+                    <Card movie={movie} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          )}
 
-        {/* comingSoonSlider */}
-        {comingSoonSlider && (
-          <div className="max-w-[100rem]">
-            {comingSoonSlider}
-            <Swiper
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={"4"}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: false,
-              }}
-              loop={true}
-              pagination={true}
-              modules={[EffectCoverflow, Pagination]}
-            >
-              {NowShowingData.comingSoonMovie.map((movie, index) => (
-                <SwiperSlide key={index}>
-                  <Card movie={movie} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        )}
+          {/* comingSoonSlider */}
+          {comingSoonSlider && (
+            <div>
+              {comingSoonSlider}
+              <Swiper
+                effect={"coverflow"}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={"4"}
+                coverflowEffect={{
+                  rotate: 0,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: false,
+                }}
+                loop={true}
+                modules={[EffectCoverflow]}
+              >
+                {NowShowingData.comingSoonMovie.map((movie, index) => (
+                  <SwiperSlide key={index}>
+                    <Card movie={movie} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-    // </div>
   );
 }
 
