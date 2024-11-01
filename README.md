@@ -1,14 +1,11 @@
 # SMOVIE
 
-<<<<<<< HEAD
-Development Goal
-
-=======
 <p>SMOVIE is a responsive movie search application built with React, Tailwind CSS, and Swiper. It enables users to discover movies by genre, save favorites, and access them anytime with ease. The app includes interactive features like embedded YouTube trailers, data storage via JSON files, and a favorites system that utilizes local storage for persistent user preferences.</p>
 
 <img src="./public/interface.png">
 
 ## Features
+
 <ul>
 <li><h3>YouTube Video Embedding</h3> YouTube videos are embedded using iframe for seamless playback within the application.</li>
 <li><h3>Data Storage with JSON</h3> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li>
@@ -16,6 +13,7 @@ Development Goal
 </ul>
 
 ## Challenge
+
 <ul>
   <li>
     <h3>Real-Time Favorite Count Update in Local Storage</h3>  
@@ -29,62 +27,68 @@ The FavBtn component handles the logic for adding and removing movies from the f
 //FavBtn.jsx
 
 const toggleFavorite = () => {
-  setFavorites((prevFavorites) => {
-    const newFavorites = prevFavorites.includes(movieId)
-      ? prevFavorites.filter((id) => id !== movieId) 
-      : [...prevFavorites, movieId];
+setFavorites((prevFavorites) => {
+const newFavorites = prevFavorites.includes(movieId)
+? prevFavorites.filter((id) => id !== movieId)
+: [...prevFavorites, movieId];
 
-    localStorage.setItem("favorites", JSON.stringify(newFavorites)); 
+    localStorage.setItem("favorites", JSON.stringify(newFavorites));
     window.dispatchEvent(new Event("favoritesUpdated")); // Dispatching event for count update
 
     return newFavorites;
-  });
+
+});
 };
+
 ```
 </li>
 
 <br />
 
 <li>Real-Time Count Update:
-  
+
 
 The header component listens for changes to the favorites and updates the displayed favorite count in real-time. When the favorite movies are modified, the header component fetches the updated count from local storage and reflects it immediately in the UI.
 ```
+
 //Header.jsx
 
 useEffect(() => {
-  const updateFavoriteCount = () => {
-    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavoriteCount(savedFavorites.length); // Update favorite count
-  };
+const updateFavoriteCount = () => {
+const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+setFavoriteCount(savedFavorites.length); // Update favorite count
+};
 
-  updateFavoriteCount(); // Initial count load
-  window.addEventListener("favoritesUpdated", updateFavoriteCount);
+updateFavoriteCount(); // Initial count load
+window.addEventListener("favoritesUpdated", updateFavoriteCount);
 
-  return () => {
-    window.removeEventListener("favoritesUpdated", updateFavoriteCount);
-  };
+return () => {
+window.removeEventListener("favoritesUpdated", updateFavoriteCount);
+};
 }, []);
+
 ```
 </li>
 
 <br />
 
 <li>Displaying the Favorite Count:
-  
+
 
 The favorite count is displayed next to the heart icon in the header, providing users with immediate feedback about their favorite movies. The count updates automatically whenever the favorites change, ensuring that the user always sees the correct number of favorites:
 ```
+
 //Header.jsx
 
 {favoriteCount > 0 && (
-  <span className="bg-purple-500 text-white text-xs rounded-full px-1">
-    {favoriteCount}
-  </span>
+<span className="bg-purple-500 text-white text-xs rounded-full px-1">
+{favoriteCount}
+</span>
 )}
+
 ```
 
 </ul>
->>>>>>> beced41a5167bbc50ef0e4e33343c076f6683689
 
 
+```
