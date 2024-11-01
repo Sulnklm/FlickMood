@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import BannerSliderData from "../../config/data.json";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faVolumeXmark, faVolumeLow } from "@fortawesome/free-solid-svg-icons";
+// import { icon } from "@fortawesome/fontawesome-svg-core";
 
 function Banner() {
   const [bannerSlider, setBannerSlider] = useState([]);
+  // const [isMuted, setIsMuted] = useState(true);
 
-  // Load banner slider data
   useEffect(() => {
     setBannerSlider(BannerSliderData.bannerSlider);
   }, []);
+
 
   return (
     <div>
@@ -24,6 +28,7 @@ function Banner() {
         loop={true}
       >
         {bannerSlider.map((movie, index) => {
+          
           return (
             <SwiperSlide key={movie.ranking || index}>
               <div>
@@ -41,9 +46,20 @@ function Banner() {
                 </div>
                 <div className="container mx-auto video">
                   <div className="grid justify-center items-center h-full absolute top-0 z-20">
-                    <div className="lg:m-20 ml-5 text-white grid justify-center items-center">
-                      <h1 className="lg:mb-4 mb-2">{movie.bannerMovieTitle}</h1>
-                      <h3 className="max-w-[15rem] md:max-w-[25rem]">{movie.overview}</h3>                      
+                    <div className=" ml-5 text-white grid justify-center items-center space-y-5">
+                      <h1>{movie.bannerMovieTitle}</h1>
+                      <h3 className="max-w-[15rem] md:max-w-[25rem]">
+                        {movie.overview}
+                      </h3>
+                      {/* <button
+                        onClick={handleMuteToggle}
+                        className="bg-white w-fit rounded-full"
+                      >
+                        <FontAwesomeIcon
+                          icon={isMuted ? faVolumeXmark : faVolumeLow} 
+                          className="p-3 px-5 text-purple-500 text-xl"
+                        />
+                      </button> */}
                     </div>
                   </div>
                 </div>

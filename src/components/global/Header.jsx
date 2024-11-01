@@ -29,7 +29,7 @@ function Header() {
   }, []); // Empty dependency array means this runs once on mount
 
   return (
-    <header className="sticky top-0 bg-white shadow-md z-10 bg-opacity-90"> {/* Sticky header with background and shadow */}
+    <header className="sticky top-0 bg-white shadow-md z-10 bg-opacity-90"> 
       <div className="container mx-auto flex items-center p-4">
         <Link to="/" className="flex justify-start">
           <img src="../public/logo.png" alt="" className="w-[7rem]" />

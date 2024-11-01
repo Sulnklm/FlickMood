@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-// FavoriteIcon 컴포넌트 및 useFavorites 훅 통합
 const FavoriteButton = ({ movieId }) => {
   const [favorites, setFavorites] = useState(() => {
     return JSON.parse(localStorage.getItem("favorites")) || [];
@@ -14,10 +13,10 @@ const FavoriteButton = ({ movieId }) => {
   const toggleFavorite = () => {
     setFavorites((prevFavorites) => {
       const newFavorites = prevFavorites.includes(movieId)
-        ? prevFavorites.filter((id) => id !== movieId) // 영화 제거
-        : [...prevFavorites, movieId]; // 영화 추가
+        ? prevFavorites.filter((id) => id !== movieId) 
+        : [...prevFavorites, movieId];
 
-      localStorage.setItem("favorites", JSON.stringify(newFavorites)); // 로컬 스토리지 업데이트
+      localStorage.setItem("favorites", JSON.stringify(newFavorites)); 
 
       
       window.dispatchEvent(new Event("favoritesUpdated"));
