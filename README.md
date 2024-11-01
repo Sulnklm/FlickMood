@@ -2,17 +2,52 @@
 
 <p>SMOVIE is a responsive movie search application built with React, Tailwind CSS, and Swiper. It enables users to discover movies by genre, save favorites, and access them anytime with ease. The app includes interactive features like embedded YouTube trailers, data storage via JSON files, and a favorites system that utilizes local storage for persistent user preferences.</p>
 
+<br /> 
+
 <img src="./public/interface.png">
+
+<br />
 
 ## Features
 
 <ul>
-<li><h3>YouTube Video Embedding</h3> YouTube videos are embedded using iframe for seamless playback within the application.</li>
-<li><h3>Data Storage with JSON</h3> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li>
-<li><h3>Favorites with Local Storage</h3> Users can save favorites, which are stored in local storage for persistent data access.</li>
+<li><h4>Data Storage with JSON</h4> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li>
+<li><h4>Favorites with Local Storage</h4> Users can save favorites, which are stored in local storage for persistent data access.</li>
 </ul>
 
-## Challenge
+<br />
+
+## Instructions to Access the SMOVIE Project
+<p>To access the SMOVIE project, follow these steps:</p>
+
+<ol>
+  <li>
+    <p>Ensure you have Node.js and npm installed on your computer.</p>
+  </li>
+  <li>
+   <p>Within Visual Studio Code, open the terminal.</p>
+  </li>
+  <li>
+   <p>In the terminal, run the following commands:</p>
+
+   ``` 
+cd smovie
+   ```
+ ``` 
+npm install
+   ```
+ ``` 
+npm run dev
+   ```
+  </li>
+  <li>
+    After running the commands, click to view the local host URL in your browser (typically http://localhost:3000).
+  </li>
+</u=ol>
+
+<br />
+
+## Challenges
 
 <ul>
   <li>
