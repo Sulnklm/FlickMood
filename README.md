@@ -124,6 +124,3 @@ The favorite count is displayed next to the heart icon in the header, providing 
 ```
 
 </ul>
-
-
-```
