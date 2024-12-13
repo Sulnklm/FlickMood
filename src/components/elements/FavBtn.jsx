@@ -13,12 +13,11 @@ const FavoriteButton = ({ movieId }) => {
   const toggleFavorite = () => {
     setFavorites((prevFavorites) => {
       const newFavorites = prevFavorites.includes(movieId)
-        ? prevFavorites.filter((id) => id !== movieId) 
+        ? prevFavorites.filter((id) => id !== movieId)
         : [...prevFavorites, movieId];
 
-      localStorage.setItem("favorites", JSON.stringify(newFavorites)); 
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
 
-      
       window.dispatchEvent(new Event("favoritesUpdated"));
 
       return newFavorites;
@@ -26,14 +25,17 @@ const FavoriteButton = ({ movieId }) => {
   };
 
   return (
-    <div className="absolute top-0 right-0 w-9 h-9 bg-white z-10 bg-opacity-80 rounded-bl-md">
+    <div
+      className="flex gap-3 bg-purple-500 py-2 px-3 rounded-full items-center cursor-pointer"
+      onClick={toggleFavorite}
+    >
       <FontAwesomeIcon
-        className="absolute top-2 right-2 text-pink-600 text-xl drop-shadow-lg cursor-pointer"
+        className="text-white text-2xl cursor-pointer"
         icon={isLiked ? faHeart : regularHeart}
-        onClick={toggleFavorite} 
         size="lg"
         title={isLiked ? "Remove from favorites" : "Add to favorites"}
       />
+      <h3 className="text-white">Add to Favorite</h3>
     </div>
   );
 };

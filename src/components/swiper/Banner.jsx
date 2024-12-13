@@ -33,7 +33,7 @@ function Banner() {
             <SwiperSlide key={movie.ranking || index}>
               <div>
                 {/* Video and information section */}
-                <div className="relative h-full">
+                <div className="relative max-h-[50vh]">
                   <div className="absolute inset-0 bg-gradient-to-r from-black z-10 w-[50%]"></div>
                   <div className="flex items-center justify-center overflow-hidden relative w-full aspect-[4.78/2] lg:aspect-[4.78/2]">
                     <iframe
