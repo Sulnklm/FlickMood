@@ -23,7 +23,7 @@ module.exports = {
         'h1-lg': ['40px'], 
         'h2': ['15px'],
         'h2-lg': ['24px'],
-        'h3': ['12px', { lineHeight: '1.5' }],
+        'h3': ['18px', { lineHeight: '1.5' }],
         'h3-lg': ['20px', { lineHeight: '1.5' }],
         'p': ['12px', { lineHeight: '1.5' }],
         'p-lg': ['18px', { lineHeight: '1.5' }],
@@ -53,7 +53,7 @@ module.exports = {
           },
         },
         'p': {
-          "@apply font-kantumruy font-light text-p": {},
+          "@apply font-kantumruy font-normal text-p": {},
           '@screen lg': {
             '@apply text-p-lg': {},
           },

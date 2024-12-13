@@ -16,7 +16,7 @@ function Header() {
         </Link>
         <div className="flex-grow flex justify-end">
           <nav>
-            <ul className="flex justify-end gap-10">
+            <ul className="flex justify-end gap-5 lg:gap-10">
               {/* Search Box with Suggestions */}
               <li className="flex items-center gap-2">
                 <SearchBox onResultClick={(movieId) => navigate(`/movie/${movieId}`)} /> {/* Use the SearchBox component and pass the click handler */}

@@ -75,7 +75,7 @@ const SearchBox = () => {
 
   
   return (
-    <div className="relative">
+    <div className="relative min-w-[10rem]">
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
         className="text-xl absolute right-5 top-[10px] cursor-pointer"
@@ -87,7 +87,7 @@ const SearchBox = () => {
         onChange={handleSearchInput} // Handle input change
         onKeyPress={(e) => e.key === "Enter" && handleSearchSubmit()} // Trigger search on Enter key press
         placeholder="Search movies..."
-        className="p-2 border rounded-full w-[20vw] border-gray-300"
+        className="p-2 border rounded-full border-gray-300"
       />
       
       

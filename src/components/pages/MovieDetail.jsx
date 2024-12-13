@@ -70,40 +70,38 @@ const MovieDetail = () => {
 
   return (
     <div>
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto py-10 p-5">
         {movieDetails && (
-          <div className="flex flex-col items-center space-y-5">
+          <div className="lg:flex items-center space-y-5 gap-10">
             {/* Display movie poster */}
             <img
               src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
               alt={movieDetails.title}
-              className="w-64 h-auto rounded-md shadow-lg mb-6"
+              className="max-w-[30rem] w-full h-auto rounded-md shadow-lg"
             />
+            <div className="space-y-5">
+              {/* Display movie title */}
+              <h1 className="font-bold mb-4">{movieDetails.title}</h1>
 
-            {/* Display movie title */}
-            <h1 className="text-4xl font-bold text-center mb-4">
-              {movieDetails.title}
-            </h1>
+              {/* Display movie release date and rating */}
+              <p className="text-lg">
+                {movieDetails.release_date}
+              </p>
+              <p className="text-lg">
+                Rating: {movieDetails.vote_average} / 10
+              </p>
 
-            <FavoriteButton movieId={movieId} />
+              {/* Display movie genres */}
+              <div className="">
+                <h3>Genres: </h3> {movieDetails.genres.map((genre) => genre.name).join(", ")}{" "}
+                {/* Join all genres with commas */}
+              </div>
 
-            {/* Display movie release date and rating */}
-            <p className="text-lg text-center mb-6">
-              Release Date: {movieDetails.release_date}
-            </p>
-            <p className="text-lg text-center mb-6">
-              Rating: {movieDetails.vote_average} / 10
-            </p>
+              {/* Display movie overview */}
+              <p>{movieDetails.overview}</p>
 
-            {/* Display movie genres */}
-            <div className="text-center mb-6">
-              <span className="font-semibold">Genres: </span>
-              {movieDetails.genres.map((genre) => genre.name).join(", ")}{" "}
-              {/* Join all genres with commas */}
+              <FavoriteButton movieId={movieId} />
             </div>
-
-            {/* Display movie overview */}
-            <p className="text-lg text-center mb-6">{movieDetails.overview}</p>
           </div>
         )}
       </div>

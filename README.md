@@ -1,6 +1,6 @@
 # SMOVIE
 
-<p>SMOVIE is a responsive movie search application built with React, Tailwind CSS, and Swiper. It enables users to discover movies by genre, save favorites, and access them anytime with ease. The app includes interactive features like embedded YouTube trailers, data storage via JSON files, and a favorites system that utilizes local storage for persistent user preferences.</p>
+<p>SMOVIE is a responsive movie search application built with React, Tailwind CSS, and Swiper. It enables users to discover movies by genre, save favorites, and access them anytime with ease. The app includes interactive features like data storage via JSON files and a favorites system that utilizes local storage for persistent user preferences.</p> <br /> <img src="./public/interface.png">
 
 <br />
 
@@ -8,11 +8,7 @@
 
 ## Features
 
-<ul>
-<li><h3>YouTube Video Embedding</h3> YouTube videos are embedded using iframe for seamless playback within the application.</li>
-<li><h3>Data Storage with JSON</h3> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li>
-<li><h3>Favorites with Local Storage</h3> Users can save favorites, which are stored in local storage for persistent data access.</li>
-</ul>
+<ul> <li><h3>Data Storage with JSON</h3> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li> <li><h3>Favorites with Local Storage</h3> Users can save favorites, which are stored in local storage for persistent data access.</li> </ul>
 
 ## Challenge
 
@@ -94,3 +90,11 @@ The favorite count is displayed next to the heart icon in the header, providing 
 
 
 ```
+
+## Challenge
+
+<ul> <li> <h3>Favorite Page: Missing Movie Details</h3> <p>The issue with the FavoritePage component was that only movie IDs were being stored and rendered. When the favorites were retrieved from local storage, only the IDs were available, so the page displayed only the IDs instead of the movie details.</p> <p>Here's how I fixed it:</p> <ol> <li>**Fetching movie details**: I added a function (`fetchMovieDetails`) to fetch full movie data (e.g., title, poster, release date) using the movie IDs from **The Movie Database (TMDb) API**.</li> <li>**Storing movie details**: Instead of storing only movie IDs, I now store the full movie objects (including title, poster, etc.) in the `movies` state.</li> <li>**Rendering the details**: In the JSX, I updated the code to map over the `movies` array (which contains the full movie objects) and display the relevant details like the poster and title.</li> </ol> </li> </ul>
+
+## How to Run the SMOVIE React Project
+
+
