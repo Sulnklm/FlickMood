@@ -1,3 +1,4 @@
+# SMOVIE
 
 <p>SMOVIE is a responsive movie search application built with React, Tailwind CSS, and Swiper. It enables users to discover movies by genre, save favorites, and access them anytime with ease. The app includes interactive features like data storage via JSON files and a favorites system that utilizes local storage for persistent user preferences.</p>
 
