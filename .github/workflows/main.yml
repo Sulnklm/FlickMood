@@ -24,4 +24,4 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: "dist/"
-          server-dir: "flickmood.sulnklm.com"
+          server-dir: "flickmood.sulnklm.com/"
