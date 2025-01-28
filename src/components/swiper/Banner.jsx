@@ -5,8 +5,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade"; // EffectFade 스타일 임포트
 import Avatar from "/public/image/avatar.jpg";
-import SpiderMan from "/public/image/Spider-man.jpeg";
-import Wicked from "/public/image/Wicked.jpeg";
+import SpiderMan from "/public/image/spider-man.jpeg";
+import Wicked from "/public/image/wicked.jpeg";
 import InsideOut from "/public/image/insideout.jpeg";
 
 const slides = [
