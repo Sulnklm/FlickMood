@@ -52,6 +52,13 @@ const SearchBox = () => {
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
       navigate(`/search?query=${searchQuery}`);
+      // 키보드 강제 닫기
+      if (window && window.document) {
+        const inputElement = document.activeElement;
+        if (inputElement && inputElement.blur) {
+          inputElement.blur(); 
+        }
+      }
     }
   };
 

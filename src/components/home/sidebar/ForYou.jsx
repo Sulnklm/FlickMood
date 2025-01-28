@@ -79,7 +79,7 @@ function ForYou() {
   }, [favorites]);
 
   return (
-    <section className="bg-customGreen rounded-[20px] m-5 p-8">
+    <section className="bg-customGreen rounded-[20px] m-3 lg:m-5 p-8">
       <h2 className="text-white mb-7">You Might Like</h2>
       {recommendedMovies.length === 0 ? (
         <p className="text-white/60">

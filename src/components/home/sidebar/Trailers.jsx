@@ -28,7 +28,7 @@ function Trailers() {
             <SwiperSlide key={movie.ranking || index}>
               <div>
                 {/* Video and information section */}
-                <div className="relative max-h-[50vh] mt-5 mx-5">
+                <div className="relative max-h-[50vh] mt-5 mx-3 lg:mx-5">
                   <div className="rounded-[20px] flex items-center justify-center overflow-hidden relative w-full aspect-[4.78/2] lg:aspect-[4.78/2]">
                     <iframe
                       className="object-cover absolute left-0 w-full h-full border-0"

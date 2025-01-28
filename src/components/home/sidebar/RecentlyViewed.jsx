@@ -52,7 +52,7 @@ function RecentlyViewed() {
   }, [recentlyViewed]);
 
   return (
-    <section className="bg-customGreen rounded-[20px] m-5 p-8">
+    <section className="bg-customGreen rounded-[20px] m-3 lg:m-5 p-8">
       <div className="flex justify-between items-center mb-7">
         <h2 className="text-white">Recently Viewed</h2>
         {/* 토글 버튼 */}

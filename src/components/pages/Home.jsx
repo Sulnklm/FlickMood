@@ -15,8 +15,10 @@ function Home() {
           <Sidebar />
         </div>
         {/* Main Content */}
-        <div className="xl:col-span-3 space-y-5 xl:order-2 mt-5 mx-5 xl:mx-0 xl:mr-5">
+        <div className="xl:col-span-3 space-y-5 xl:order-2 xl:mt-5 xl:mr-5">
+          <div className="hidden lg:block">
           <SearchBox />
+          </div>
           <Main />
         </div>
       </div>

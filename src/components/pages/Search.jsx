@@ -47,7 +47,7 @@ const Search = () => {
   }, [searchQuery]); // Fetch results whenever the search query changes
 
   return (
-    <div className="container mx-auto py-10 px-3">
+    <div className="min-h-screen container mx-auto py-10 px-3">
       <h2 className="mb-8 text-center">
         Search Results for "{searchQuery}"
       </h2>
@@ -56,7 +56,7 @@ const Search = () => {
       {error && <p>{error}</p>}
 
       {searchResults.length === 0 ? (
-        <p>No results found for "{searchQuery}"</p>
+        <p className="text-center">No results found for "{searchQuery}"</p>
       ) : (
         <ul className="gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center">
           {searchResults.map((movie) => (

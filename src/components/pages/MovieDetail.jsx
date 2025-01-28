@@ -152,7 +152,7 @@ const MovieDetail = () => {
 
   return (
     <div className="2xl:max-w-[80vw] container mx-auto mt-5">
-      <div className="container mx-auto md:p-5">
+      <div className="container mx-auto">
         {movieDetails && (
           <div>
             <div className="lg:flex items-center space-y-5 gap-5">
@@ -232,7 +232,7 @@ const MovieDetail = () => {
           )}
         </div>
 
-        <div className="container mx-auto bg-customGreen rounded-[20px] p-5 xl:p-10 m-5">
+        <div className="container mx-auto bg-customGreen rounded-[20px] p-5 xl:p-10 mt-5">
           <h2 className="mb-5">Reviews</h2>
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
