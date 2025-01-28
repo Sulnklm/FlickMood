@@ -2,18 +2,63 @@
 
 <p>SMOVIE is a responsive movie search application built with React, Tailwind CSS, and Swiper. It enables users to discover movies by genre, save favorites, and access them anytime with ease. The app includes interactive features like data storage via JSON files and a favorites system that utilizes local storage for persistent user preferences.</p>
 
+<<<<<<< HEAD
 <br />
 
 <img src="./public/interface.png" />
+=======
+<br /> 
+
+<img src="./public/interface.png">
+>>>>>>> 991f719d292a55e69bcfcb2348ee06b7d644448a
+
+<br />
 
 ## Features
 
 <ul>
+<<<<<<< HEAD
   <li><h3>Data Storage with JSON</h3> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li>
   <li><h3>Favorites with Local Storage</h3> Users can save favorites, which are stored in local storage for persistent data access.</li>
+=======
+<li><h4>Data Storage with JSON</h4> Data is stored and managed in a data.json file, providing flexibility and easy updates to the content.</li>
+<li><h4>Favorites with Local Storage</h4> Users can save favorites, which are stored in local storage for persistent data access.</li>
+>>>>>>> 991f719d292a55e69bcfcb2348ee06b7d644448a
 </ul>
 
-## Challenge
+<br />
+
+## Instructions to Access the SMOVIE Project
+<p>To access the SMOVIE project, follow these steps:</p>
+
+<ol>
+  <li>
+    <p>Ensure you have Node.js and npm installed on your computer.</p>
+  </li>
+  <li>
+   <p>Within Visual Studio Code, open the terminal.</p>
+  </li>
+  <li>
+   <p>In the terminal, run the following commands:</p>
+
+   ``` 
+cd smovie
+   ```
+ ``` 
+npm install
+   ```
+ ``` 
+npm run dev
+   ```
+  </li>
+  <li>
+    After running the commands, click to view the local host URL in your browser (typically http://localhost:3000).
+  </li>
+</u=ol>
+
+<br />
+
+## Challenges
 
 <ul>
   <li>
@@ -83,6 +128,7 @@ useEffect(() => {
     </ol>
   </li>
 </ul>
+<<<<<<< HEAD
 
 ## Favorite Page: Missing Movie Details
 
@@ -117,3 +163,5 @@ REACT_APP_API_KEY=your-api-key
 
 5. Run the Development Server
 npm start
+=======
+>>>>>>> 991f719d292a55e69bcfcb2348ee06b7d644448a
