@@ -32,10 +32,10 @@ const FavoriteCountButton = () => {
   return (
     <li className="flex items-center justify-center gap-1.5">
       <Link to="/favorite">
-        <FontAwesomeIcon icon={faHeart} className="text-xl lg:text-2xl text-white" />
+        <FontAwesomeIcon icon={faHeart} className="text-2xl text-white" />
       </Link>
       {favoriteCount > 0 && (
-        <span className="bg-customMint font-[500] text-sm rounded-full px-1.5">
+        <span className="bg-customMint font-[600] text-xs rounded-full px-[5px]">
           {favoriteCount}
         </span>
       )}
