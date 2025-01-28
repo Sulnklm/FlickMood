@@ -6,7 +6,7 @@ import FavoriteCountButton from "./FavoriteCountButton";
 
 function Header() {
   return (
-    <header className="sticky bg-customGreen top-0 shadow-md z-10 px-5">
+    <header className="sticky bg-customGreen top-0 shadow-md px-5 z-[1000]">
       <div className="container mx-auto flex items-center gap-5 py-3">
         <Link to="/" className="flex justify-start">
           <h2 className="font-[400]">FlickMood</h2>
