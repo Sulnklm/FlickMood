@@ -18,8 +18,7 @@ span.swiper-pagination-bullet-active {
   @apply bg-white
 }
 
-
-/* Tailwind Scrollbar */
+/* Scrollbar */
 .scrollbar-hide {
   -ms-overflow-style: none; 
   scrollbar-width: none; /* Firefox */

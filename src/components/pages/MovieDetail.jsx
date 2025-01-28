@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import "swiper/css"; // Swiper 기본 스타일
-import "swiper/css/effect-coverflow"; // Coverflow 효과를 위한 스타일
-import MovieCard from "../elements/MovieCard"; // MovieCard 컴포넌트
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import MovieCard from "../elements/MovieCard";
 import RatingBox from "../elements/Rating";
 import FavBtn from "../elements/FavBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "../../index.css";
 
-const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6"; // The Movie DB API 키
-const BASE_URL = "https://api.themoviedb.org/3"; // The Movie DB API URL
+const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6";
+const BASE_URL = "https://api.themoviedb.org/3";
 
 const MovieDetail = () => {
   const { movieId } = useParams();
@@ -26,22 +26,38 @@ const MovieDetail = () => {
   const [trailer, setTrailer] = useState(null);
   const [reviews, setReviews] = useState([]);
 
-  const [expandedReviewId, setExpandedReviewId] = useState(null); // 어떤 리뷰가 확장된 상태인지 추적
-
-  const handleToggleReview = (reviewId) => {
-    if (expandedReviewId === reviewId) {
-      setExpandedReviewId(null); // 이미 확장된 리뷰를 다시 클릭하면 축소
-    } else {
-      setExpandedReviewId(reviewId); // 리뷰 확장
-    }
+  // Mouse drag handlers
+  const castScrollContainer = useRef(null);
+  const handleCastMouseDown = (e) => {
+    const container = castScrollContainer.current;
+    container.isMouseDown = true;
+    container.startX = e.pageX - container.offsetLeft;
+    container.scrollLeftStart = container.scrollLeft;
+  };
+  const handleCastMouseMove = (e) => {
+    const container = castScrollContainer.current;
+    if (!container.isMouseDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - container.startX) * 1.5; // scroll speed
+    container.scrollLeft = container.scrollLeftStart - walk;
+  };
+  const handleCastMouseUp = () => {
+    const container = castScrollContainer.current;
+    container.isMouseDown = false;
+  };
+  const preventDrag = (e) => {
+    e.preventDefault(); // image 이미지 기본 드래그 동작 차단
   };
 
-  const genreMap = {
-    28: "Action",
-    12: "Adventure",
-    16: "Animation",
-    35: "Comedy",
-    80: "Crime",
+  // Review expand/collapse
+  const [expandedReviewId, setExpandedReviewId] = useState(null);
+  const handleToggleReview = (reviewId) => {
+    if (expandedReviewId === reviewId) {
+      setExpandedReviewId(null);
+    } else {
+      setExpandedReviewId(reviewId);
+    }
   };
 
   const handleFavoriteChange = (movieId) => {
@@ -55,28 +71,28 @@ const MovieDetail = () => {
     }
   };
 
-  // 영화 상세 정보와 관련 영화, 등장인물, 트레일러 불러오기
+  // Movie details fetching function
   const fetchMovieDetails = async () => {
     setLoading(true);
     setError(null); // 오류 초기화
 
     try {
-      // 영화 상세 정보 가져오기
+      // Compare this snippet from src/components/home/main/Trending.jsx:
       const movieResponse = await axios.get(`${BASE_URL}/movie/${movieId}`, {
         params: {
           api_key: API_KEY,
         },
       });
 
-      setMovieDetails(movieResponse.data); // 영화 상세 정보 상태 업데이트
+      setMovieDetails(movieResponse.data); // movie details update
 
-      // 좋아요 상태 확인
+      // FavBtn
       const savedFavorites =
         JSON.parse(localStorage.getItem("favorites")) || [];
       setIsFavorite(savedFavorites.includes(movieId));
 
-      // 같은 장르의 관련 영화 가져오기
-      const genreIds = movieResponse.data.genres.map((genre) => genre.id); // 영화의 장르 ID들
+      // Same Genre Movies
+      const genreIds = movieResponse.data.genres.map((genre) => genre.id);
       if (genreIds.length > 0) {
         const relatedResponse = await axios.get(`${BASE_URL}/discover/movie`, {
           params: {
@@ -90,7 +106,7 @@ const MovieDetail = () => {
         setRelatedMovies([]); // If no genres, set related movies to empty array
       }
 
-      // 등장인물 정보 불러오기
+      // cast
       const castResponse = await axios.get(
         `${BASE_URL}/movie/${movieId}/credits`,
         {
@@ -99,9 +115,9 @@ const MovieDetail = () => {
           },
         }
       );
-      setCast(castResponse.data.cast); // 등장인물 정보 상태 업데이트
+      setCast(castResponse.data.cast); // cast update
 
-      // 트레일러 정보 불러오기
+      // trailer
       const trailerResponse = await axios.get(
         `${BASE_URL}/movie/${movieId}/videos`,
         {
@@ -113,9 +129,9 @@ const MovieDetail = () => {
       const trailerData = trailerResponse.data.results.find(
         (video) => video.type === "Trailer"
       );
-      setTrailer(trailerData); // 트레일러 상태 업데이트
+      setTrailer(trailerData); // trailer update
 
-      // 리뷰 정보 불러오기
+      // reviews
       const reviewsResponse = await axios.get(
         `${BASE_URL}/movie/${movieId}/reviews`,
         {
@@ -124,11 +140,11 @@ const MovieDetail = () => {
           },
         }
       );
-      // 평점이 있는 리뷰만 필터링하여 최대 4개만 표시
+      // Filter reviews with ratings and limit to 4 reviews
       const filteredReviews = reviewsResponse.data.results
-        .filter((review) => review.author_details.rating) // 평점이 있는 리뷰만 필터링
-        .slice(0, 4); // 최대 4개 리뷰만
-      setReviews(filteredReviews); // 리뷰 정보 상태 업데이트
+        .filter((review) => review.author_details.rating)
+        .slice(0, 4);
+      setReviews(filteredReviews); // reviews update
     } catch (err) {
       setError("Failed to load movie data.");
       console.error(err); // Log error if API request fails
@@ -142,7 +158,6 @@ const MovieDetail = () => {
   }, [movieId]);
 
   useEffect(() => {
-    // 좋아요 상태 업데이트 후 로컬 스토리지에서 새로 가져오기
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setIsFavorite(savedFavorites.includes(movieId));
   }, [movieId]);
@@ -160,6 +175,7 @@ const MovieDetail = () => {
                 src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
                 alt={movieDetails.title}
                 className="max-w-[20rem] w-full h-auto rounded-md mx-auto"
+                loading="lazy"
               />
               <div className="bg-customGreen p-5 xl:p-10 rounded-[20px]">
                 <div className="grid lg:flex items-center gap-3">
@@ -192,7 +208,20 @@ const MovieDetail = () => {
                 {/* Cast */}
                 <div>
                   <p className="text-lg font-[500] mb-5">Top Billed Cast</p>
-                  <div className="overflow-x-auto flex flex-nowrap gap-5 scrollbar-hide max-w-full">
+                  <div
+                    ref={castScrollContainer}
+                    className="overflow-x-auto flex flex-nowrap gap-5 scrollbar-hide max-w-full"
+                    style={{
+                      cursor: "grab",
+                      userSelect: "none",
+                      WebkitOverflowScrolling: "touch",
+                    }}
+                    onMouseDown={handleCastMouseDown}
+                    onMouseMove={handleCastMouseMove}
+                    onMouseLeave={handleCastMouseUp}
+                    onMouseUp={handleCastMouseUp}
+                    onDragStart={preventDrag}
+                  >
                     {cast.length > 0 ? (
                       cast.slice(0, 6).map((actor) => (
                         <div
@@ -225,6 +254,7 @@ const MovieDetail = () => {
                 src={`https://www.youtube.com/embed/${trailer.key}`}
                 className="absolute top-0 left-0 w-full h-full rounded-[20px]"
                 allowFullScreen
+                loading="lazy"
               />
             </div>
           ) : (

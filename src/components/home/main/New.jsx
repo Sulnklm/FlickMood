@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
+import { EffectCoverflow, Autoplay } from "swiper/modules";
 import axios from "axios";
 import MovieCard from "../../elements/MovieCard";
 import newBadge from "/public/image/new.svg";
 
-const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6"; // The Movie DB API 키
+const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6"; 
 const BASE_URL = "https://api.themoviedb.org/3";
 
 function New() {
   const [movies, setMovies] = useState([]);
-  const [trendyMovies, setTrendyMovies] = useState([]); // 인기 영화 데이터
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -26,20 +25,19 @@ function New() {
           page: 1,
         },
       });
-      return response.data.results.map((movie) => movie.id); // 트렌디 영화 ID만 반환
+      return response.data.results.map((movie) => movie.id); 
     } catch (err) {
       console.error("Failed to fetch trendy movies:", err);
       return [];
     }
   };
 
-  // 최신(New) 영화 데이터 가져오기
   const fetchNewMovies = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const trendyIds = await fetchTrendyMovies(); // 트렌디 영화 ID 가져오기
+      const trendyIds = await fetchTrendyMovies(); 
 
       const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
         params: {
@@ -49,12 +47,11 @@ function New() {
         },
       });
 
-      // 트렌디 영화 ID와 겹치지 않는 영화만 필터링
       const uniqueMovies = response.data.results.filter(
         (movie) => !trendyIds.includes(movie.id)
       );
 
-      setMovies(uniqueMovies); // 고유한 최신 영화 데이터 설정
+      setMovies(uniqueMovies);
     } catch (err) {
       setError("Failed to load new movies.");
       console.error(err);
@@ -81,12 +78,18 @@ function New() {
         <Swiper
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={"2"}
+          slidesPerView={"2.5"}
           spaceBetween={20}
+          speed={2000}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
           loop={true}
+          modules={[EffectCoverflow, Autoplay]}
           breakpoints={{
             1024: { slidesPerView: 4.5 },
-            768: { slidesPerView: 2 },
+            768: { slidesPerView: 3.5 },
           }}
         >
           {movies.map((movie, index) => (

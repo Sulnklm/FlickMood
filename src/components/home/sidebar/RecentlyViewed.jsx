@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieCardSmall from "../../elements/MovieCardSmall";
 
-const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6"; // TMDB API 키
+const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6"; 
 
 function RecentlyViewed() {
   const [recentlyViewed, setRecentlyViewed] = useState(() => {
@@ -17,7 +17,7 @@ function RecentlyViewed() {
   });
 
   const [movies, setMovies] = useState([]);
-  const [isVisible, setIsVisible] = useState(true); // 토글 상태 관리
+  const [isVisible, setIsVisible] = useState(true); 
 
   const fetchMovieDetails = async (movieId) => {
     try {
@@ -26,7 +26,6 @@ function RecentlyViewed() {
       );
       const data = await response.json();
 
-      // `genres`를 `genre_ids`로 변환
       if (data.genres) {
         data.genre_ids = data.genres.map((genre) => genre.id);
       }
@@ -52,10 +51,9 @@ function RecentlyViewed() {
   }, [recentlyViewed]);
 
   return (
-    <section className="bg-customGreen rounded-[20px] m-3 lg:m-5 p-8">
+    <section className="bg-customGreen rounded-[20px] p-5 lg:p-8 w-full">
       <div className="flex justify-between items-center mb-7">
         <h2 className="text-white">Recently Viewed</h2>
-        {/* 토글 버튼 */}
         <button
           onClick={() => setIsVisible(!isVisible)}
           className="text-white/50 bg-gray-700 px-3 py-1 rounded-full text-sm"

@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade"; // EffectFade 스타일 임포트
+import "swiper/css/effect-fade";
 import Avatar from "/public/image/avatar.jpg";
 import SpiderMan from "/public/image/spider-man.jpeg";
 import Wicked from "/public/image/wicked.jpeg";
@@ -35,6 +35,7 @@ function Banner() {
               src={slide.src}
               alt={slide.alt}
               className="aspect-video max-h-[40vh] object-cover w-full"
+              loading="lazy"
             />
           </SwiperSlide>
         ))}

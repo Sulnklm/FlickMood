@@ -4,13 +4,25 @@ import RatingBox from "./Rating";
 import { handleMovieClick } from "../utils/storage"; // 공통 함수 가져오기
 import "../../index.css";
 
-// Define genreMap at the top
 const genreMap = {
   28: "Action",
   12: "Adventure",
   16: "Animation",
   35: "Comedy",
   80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  14: "Fantasy",
+  36: "History",
+  27: "Horror",
+  10402: "Music",
+  9648: "Mystery",
+  10749: "Romance",
+  878: "Science Fiction",
+  53: "Thriller",
+  10752: "War",
+  37: "Western",
 };
 
 function MovieCard({ movie }) {
@@ -28,6 +40,7 @@ function MovieCard({ movie }) {
           className="absolute inset-0 w-full h-full object-cover z-0"
           src={posterUrl}
           alt={movie.title}
+          loading="lazy" 
         />
 
         {/* Gradient Overlay */}
@@ -48,7 +61,7 @@ function MovieCard({ movie }) {
             <h3 className="text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[100%]">
               {movie.title}
             </h3>
-            <p className="text-white/60">
+            <p className="text-white/60 text-ellipsis overflow-hidden whitespace-nowrap max-w-[100%]">
               {movie.genre_ids
                 ?.slice(0, 2)
                 .map((id) => genreMap[id])
@@ -58,13 +71,7 @@ function MovieCard({ movie }) {
           </div>
         </div>
       </Link>
-
-      {/* Favorite Button */}
-      {/* <div className="absolute top-0 right-0 m-3 z-30">
-    <FavoriteButton movieId={movie.id} />
-  </div> */}
-
-      {/* Rating Box */}
+      
       <div className="absolute top-0 right-0 m-3 z-30">
         <RatingBox rating={movie.vote_average.toFixed(1)} />
       </div>

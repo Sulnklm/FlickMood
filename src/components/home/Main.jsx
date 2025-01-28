@@ -5,7 +5,7 @@ import Trending from "./main/Trending";
 
 function Main() {
   return (
-    <div className="bg-customGreen rounded-[20px] md:p-5 xl:p-10 space-y-12">
+    <div className="bg-customGreen rounded-t-[20px] xl:rounded-[20px] md:p-5 xl:p-10 space-y-10 lg:space-y-12">
       <Mood />
       <Trending />
       <New />

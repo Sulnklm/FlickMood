@@ -20,13 +20,13 @@ function ForYou() {
 
   const fetchRecommendations = async () => {
     if (!favorites.length) {
-      console.log("No favorites found."); // 디버깅
+      // console.log("No favorites found."); 
       return;
     }
 
-    const latestMovieId = favorites[favorites.length - 1]; // 가장 최근 Favorite
+    const latestMovieId = favorites[favorites.length - 1]; 
     if (!latestMovieId) {
-      console.log("Invalid movie ID:", latestMovieId); // 디버깅
+      // console.log("Invalid movie ID:", latestMovieId); 
       return;
     }
 
@@ -79,7 +79,7 @@ function ForYou() {
   }, [favorites]);
 
   return (
-    <section className="bg-customGreen rounded-[20px] m-3 lg:m-5 p-8">
+    <section className="bg-customGreen rounded-[20px] p-5 lg:p-8 w-full">
       <h2 className="text-white mb-7">You Might Like</h2>
       {recommendedMovies.length === 0 ? (
         <p className="text-white/60">
