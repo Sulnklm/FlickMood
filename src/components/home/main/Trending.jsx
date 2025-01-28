@@ -41,9 +41,9 @@ function Trending() {
   return (
     <section>
       <div className="container mx-auto">
-        <div className="pl-5 xl:pl-0 flex items-center gap-2 mb-7">
+        <div className="pl-5 xl:pl-0 flex items-center gap-1 mb-7">
           <h1>Trending</h1>
-          <img src={fire} alt="Fire Icon" className="w-8" />
+          <img src={fire} alt="Fire Icon" className="w-7 md:w-8" />
         </div>
 
         <Swiper
