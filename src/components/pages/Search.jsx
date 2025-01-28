@@ -56,7 +56,7 @@ const Search = () => {
       {error && <p>{error}</p>}
 
       {searchResults.length === 0 ? (
-        <p className="text-center">No results found for "{searchQuery}"</p>
+        <p className="text-center text-white/50">No results found for "{searchQuery}"</p>
       ) : (
         <ul className="gap-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 place-items-center">
           {searchResults.map((movie) => (
