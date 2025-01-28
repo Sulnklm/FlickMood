@@ -9,7 +9,7 @@ function Header() {
     <header className="sticky bg-customGreen top-0 shadow-md px-5 z-[1000]">
       <div className="container mx-auto flex items-center gap-3 py-3">
         <Link to="/" className="flex justify-start">
-          <h2 className="font-[400] text-lg md:text-xl text-customMint">FlickMood</h2>
+          <h2 className="font-[500] text-xl text-customMint">FlickMood</h2>
         </Link>
         <div className="flex-grow flex justify-end">
           <nav>

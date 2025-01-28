@@ -64,7 +64,7 @@ const SearchBox = () => {
           onChange={handleSearchInput}
           onKeyPress={(e) => e.key === "Enter" && handleSearchSubmit()}
           placeholder="Search movies..."
-          className="p-2.5 md:p-4 pl-12 pr-5 w-full rounded-full bg-white/10 text-white focus:outline-none focus:bg-white/10"
+          className="p-2.5 pl-12 pr-5 w-full rounded-full bg-white/10 text-white focus:outline-none focus:bg-white/10"
         />
       </div>
 
