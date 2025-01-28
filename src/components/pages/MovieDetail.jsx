@@ -258,7 +258,7 @@ const MovieDetail = () => {
               />
             </div>
           ) : (
-            <p>No trailer available</p>
+            <></>
           )}
         </div>
 
