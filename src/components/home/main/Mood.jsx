@@ -115,7 +115,7 @@ function Mood() {
         <Swiper
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={"2.5"}
+          slidesPerView={"2"}
           spaceBetween={20}
           speed={2000}
           autoplay={{

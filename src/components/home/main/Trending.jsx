@@ -49,7 +49,7 @@ function Trending() {
         <Swiper
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={"2.5"}
+          slidesPerView={"2"}
           spaceBetween={20}
           loop={true}
           breakpoints={{
