@@ -30,12 +30,12 @@ const FavoriteCountButton = () => {
   }, []); // Empty dependency array means this runs once on mount
 
   return (
-    <li className="flex items-center justify-center gap-1">
+    <li className="flex items-center justify-center gap-1.5">
       <Link to="/favorite">
-        <FontAwesomeIcon icon={faHeart} className="text-xl" />
+        <FontAwesomeIcon icon={faHeart} className="text-2xl text-white" />
       </Link>
       {favoriteCount > 0 && (
-        <span className="bg-purple-500 text-white text-xs rounded-full px-1">
+        <span className="bg-customMint font-[500] text-sm rounded-full px-1.5">
           {favoriteCount}
         </span>
       )}

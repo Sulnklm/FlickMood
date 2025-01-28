@@ -1,24 +1,72 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import RatingBox from "./Rating";
+import { handleMovieClick } from "../utils/storage"; // 공통 함수 가져오기
+import "../../index.css";
+
+// Define genreMap at the top
+const genreMap = {
+  28: "Action",
+  12: "Adventure",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+};
 
 function MovieCard({ movie }) {
-
   const posterUrl = `https://image.tmdb.org/t/p/w780${movie.poster_path}`;
 
   return (
-    <div>
-      <div className="relative border-1 aspect-[2.7/4] max-w-[30rem] w-full h-auto  rounded-lg overflow-hidden drop-shadow-lg">
-      <Link to={`/movie/${movie.id}`}>
-
+    <div className="relative border-1 aspect-[2.7/3.8] max-w-[30rem] w-full h-auto rounded-[20px] border-[1px] border-[#1E2B31] overflow-hidden">
+      <Link
+        to={`/movie/${movie.id}`}
+        className="block w-full h-full"
+        onClick={() => handleMovieClick(movie.id)} // 공통 함수 호출
+      >
+        {/* Background Image */}
         <img
-          className="object-cover"
+          className="absolute inset-0 w-full h-full object-cover z-0"
           src={posterUrl}
-          alt={movie.title} 
+          alt={movie.title}
         />
-        <h1 className="absolute bottom-0 left-3 lg:text-5xl text-white drop-shadow-lg">
-          {movie.ranking}
-        </h1>
-        </Link>
+
+        {/* Gradient Overlay */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background: `linear-gradient(to bottom, #041219 0%, rgba(30, 43, 49, 0.7) 7%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 60%, rgba(30, 43, 49, 0.8) 75%, #041219 88%)`,
+          }}
+        ></div>
+
+        {/* Content (Text, Buttons) */}
+        <div className="absolute inset-0 z-20 p-4 flex flex-col justify-between">
+          {/* Movie Ranking */}
+          <div>{""}</div>
+
+          {/* Movie Title and Genres */}
+          <div>
+            <h3 className="text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[100%]">
+              {movie.title}
+            </h3>
+            <p className="text-white/60">
+              {movie.genre_ids
+                ?.slice(0, 2)
+                .map((id) => genreMap[id])
+                .filter(Boolean)
+                .join(" ∙ ") || ""}
+            </p>
+          </div>
+        </div>
+      </Link>
+
+      {/* Favorite Button */}
+      {/* <div className="absolute top-0 right-0 m-3 z-30">
+    <FavoriteButton movieId={movie.id} />
+  </div> */}
+
+      {/* Rating Box */}
+      <div className="absolute top-0 right-0 m-3 z-30">
+        <RatingBox rating={movie.vote_average.toFixed(1)} />
       </div>
     </div>
   );

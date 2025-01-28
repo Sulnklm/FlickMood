@@ -9,7 +9,7 @@ const ClearLocalStorageButton = () => {
   };
 
   return (
-    <button onClick={clearStorageAndReload} className="flex gap-3 items-center bg-purple-500 rounded-full px-3 py-1">
+    <button onClick={clearStorageAndReload} className="flex gap-3 items-center rounded-full px-3 py-1">
       <FontAwesomeIcon icon={faTrash} className="text-white"/>
       <h3 className="text-white">Clear</h3>
     </button>

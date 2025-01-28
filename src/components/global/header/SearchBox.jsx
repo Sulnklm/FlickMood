@@ -1,104 +1,98 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation to listen to URL changes
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios"; // Import axios to make API requests
+import axios from "axios";
 
 const SearchBox = () => {
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search query 사용자가 입력한 검색어를 저장하는 상태
-  const [searchResults, setSearchResults] = useState([]); // State to hold search results 관련 검색어 밑으로 뜨게
-  const navigate = useNavigate(); // Initialize the useNavigate hook
-  const location = useLocation(); // Hook to listen for URL changes
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Function to handle search query change
   const handleSearchInput = (e) => {
-    setSearchQuery(e.target.value); // Update the search query as user types 사용자가 입력하는 텍스트를 계속 추적해서 searchQuery 상태에 저장함
+    setSearchQuery(e.target.value);
   };
 
-  // Fetch search results as user types 
   useEffect(() => {
-    const fetchSearchResults = async () => {
-      // 
-      try {
-        const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-          params: {
-            api_key: "0e16d9b4af07e316bb36fc1286684dd6", 
-            query: searchQuery, // The search query from the input 사용자가 입력한 검색어
-            page: 5, 
-            // query, page와 같은 이름들은 API에서 정해진 이름. API 설계자가 설정한 것
-          },
-        });
+    if (searchQuery.trim() === "") {
+      setSearchResults([]);
+      return;
+    }
 
-        // Limit the results to the first 3 movies
-        setSearchResults(response.data.results.slice(0, 3)); // Get only the first 3 results
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-      }
+    // const fetchSearchResults = async () => {
+    //   setIsLoading(true);
+    //   try {
+    //     const response = await axios.get(
+    //       `https://api.themoviedb.org/3/search/movie`,
+    //       {
+    //         params: {
+    //           api_key: "0e16d9b4af07e316bb36fc1286684dd6",
+    //           query: searchQuery,
+    //           page: 1,
+    //         },
+    //       }
+    //     );
+    //     setSearchResults(response.data.results.slice(0, 3));
+    //   } catch (error) {
+    //     console.error("Error fetching search results:", error);
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // };
 
-      if (searchQuery.trim() === "") {
-        setSearchResults([]); // If the query is empty, reset the results. 사용자가 검색어를 입력하지 않으면 검색 결과를 비움. setSearchResults([])로 결과를 빈 배열로 설정하고, 함수 실행을 종료(return)
-        return;
-      }
-    };
+    const debounceTimer = setTimeout(() => {
+      fetchSearchResults();
+    }, 500);
 
-    fetchSearchResults();
-  }, [searchQuery]); // Fetch results whenever the search query changes. searchQuery가 바뀔 때마다 실행. 즉 사용자가 입력을 하면 이 코드가 실행되서 새로운 영화 데이터 가져옴
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
 
-
-
-
-
-  // Function to handle "Enter" key press for submitting the search query
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
-      navigate(`/search?query=${searchQuery}`); // Redirect to the search page
+      navigate(`/search?query=${searchQuery}`);
     }
   };
 
-
-
-
-  // Reset search results when the user navigates to a different page (Search page)
   useEffect(() => {
-    if (location.pathname !== '/') {
-      setSearchResults([]); // Reset the search results when navigating away from the home page
+    if (location.pathname !== "/") {
+      setSearchResults([]);
     }
   }, [location]);
 
   useEffect(() => {
-    if (location.pathname !== '/search') {
-      setSearchQuery([]); // Reset the search results when navigating away from the search page
+    if (location.pathname !== "/search") {
+      setSearchQuery("");
     }
   }, [location]);
 
-
-
-  
   return (
-    <div className="relative min-w-[10rem]">
-      <FontAwesomeIcon
-        icon={faMagnifyingGlass}
-        className="text-xl absolute right-5 top-[10px] cursor-pointer"
-        onClick={handleSearchSubmit} // Trigger search on icon click
-      />
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={handleSearchInput} // Handle input change
-        onKeyPress={(e) => e.key === "Enter" && handleSearchSubmit()} // Trigger search on Enter key press
-        placeholder="Search movies..."
-        className="p-2 border rounded-full border-gray-300"
-      />
-      
-      
-      {/* Display search results as suggestions under the input */}
+    <div className="relative w-full">
+      <div className="relative flex items-center w-full">
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="absolute left-4 text-xl text-white/50"
+        />
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchInput}
+          onKeyPress={(e) => e.key === "Enter" && handleSearchSubmit()}
+          placeholder="Search movies..."
+          className="p-3.5 pl-12 pr-5 w-full rounded-full bg-white/10 text-white"
+        />
+      </div>
+
+      {isLoading && <div className="mt-2 text-white/50">Loading...</div>}
+
       {searchQuery && searchResults.length > 0 && (
-        <div className="absolute top-10 max-w-[13rem] mt-1 bg-white shadow-md max-h-50 overflow-y-auto w-full border rounded">
+        <div className="absolute top-12 mt-1 bg-white/10 text-white drop-shadow-md max-h-50 overflow-y-auto w-full border border-gray-700 rounded-lg">
           {searchResults.map((movie) => (
             <div
               key={movie.id}
-              className="p-2 cursor-pointer hover:bg-gray-200"
-              onClick={() => navigate(`/search?query=${searchQuery}`)} // Trigger navigation when clicked
+              className="p-2 cursor-pointer hover:bg-gray-800"
+              onClick={() => navigate(`/movie/${movie.id}`)}
             >
               {movie.title}
             </div>
@@ -110,3 +104,4 @@ const SearchBox = () => {
 };
 
 export default SearchBox;
+ 

@@ -66,14 +66,14 @@ function MovieSlider() {
   if (error) return <div>{error}</div>; // 오류가 발생했을 때 표시되는 메시지
 
   return (
-    <div className="bg-slate-100 py-10">
+    <div className="py-10">
       <div className="container mx-auto">
         {/* Category buttons */}
         <div className="grid grid-cols-3 gap-3 md:grid-cols-6 justify-center mb-8 px-3">
           {categories.map((category) => (
             <button
               key={category.id}
-              className="bg-purple-500  text-white px-4 py-2 rounded-full mx-2"
+              className="bg-white/50 backdrop-blur-lg text-white px-4 py-2 rounded-full mx-2"
               onClick={() => handleCategoryClick(category.id)} // 카테고리 클릭 시 해당 ID로 필터링
               // When category is clicked, update the selected category with the ID
             >

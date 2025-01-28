@@ -9,7 +9,7 @@ import Search from "./components/pages/Search";
 function App() {
 
   return (
-    <>
+    <div className="bg-pattern backdrop-brightness-90">
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<Layout />}>
@@ -20,7 +20,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   )
 }
 

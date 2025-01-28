@@ -1,12 +1,10 @@
 function Footer() {
   return (
     <>
-      <div className=" w-full h-full border-t-[1px]">
-        <div className="container mx-auto flex justify-center align-items-center text-center max-w-[50rem] p-8">
-          <p className="text-gray-400 text-base">
-            &copy; 2024 SMOVIE
-            <br />
-            All rights reserved.
+      <div className="bg-customGreen w-full h-full mt-10">
+        <div className="container mx-auto flex justify-center align-items-center text-center max-w-[50rem] p-5">
+          <p className="text-opacity-50 text-xs font-[300]">
+            &copy; 2024 FlickMovie All rights reserved.
           </p>
         </div>
       </div>
