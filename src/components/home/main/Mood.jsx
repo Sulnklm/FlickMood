@@ -19,7 +19,7 @@ function Mood() {
 
   const scrollContainer = useRef(null);
 
-  // 드래그 스크롤 이벤트 핸들러
+  // drag scroll event handlers
   const handleMouseDown = (e) => {
     const container = scrollContainer.current;
     container.isMouseDown = true;
@@ -32,7 +32,7 @@ function Mood() {
     if (!container.isMouseDown) return;
     e.preventDefault();
     const x = e.pageX - container.offsetLeft;
-    const walk = (x - container.startX) * 1.5; // 드래그 속도
+    const walk = (x - container.startX) * 1.5; 
     container.scrollLeft = container.scrollLeftStart - walk;
   };
 
@@ -67,7 +67,7 @@ function Mood() {
     if (selectedCategory) {
       fetchMovies(selectedCategory);
     } else {
-      fetchMovies("28");
+      fetchMovies("35");
     }
   }, [selectedCategory]);
 
