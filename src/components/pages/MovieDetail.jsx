@@ -314,8 +314,8 @@ const MovieDetail = () => {
         </div>
       </div>
 
-      <div className="container mx-auto grid p-5 xl:p-10 bg-customGreen rounded-[20px] m-5">
-        <h2 className="mb-7">You May Also Like</h2>
+      <div className="container mx-auto md:p-5 grid pb-7 xl:p-10 bg-customGreen rounded-[20px] m-5">
+        <h2 className="mb-7 pt-5 md:p-0 px-5 md:px-0">You May Also Like</h2>
         <Swiper
           className="container"
           grabCursor={true}

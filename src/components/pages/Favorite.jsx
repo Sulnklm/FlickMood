@@ -26,7 +26,7 @@ const FavoritePage = () => {
 
   const fetchMovieDetails = async (movieId) => {
     if (!movieId || movieId === "null") {
-      console.log("Invalid movie ID:", movieId); // Debugging
+      // console.log("Invalid movie ID:", movieId); 
       return null;
     }
 
@@ -55,29 +55,29 @@ const FavoritePage = () => {
       const movieDetails = await Promise.all(
         validFavorites.map((movieId) => fetchMovieDetails(movieId))
       );
-      setMovies(movieDetails.filter((movie) => movie !== null)); // null 제거
+      setMovies(movieDetails.filter((movie) => movie !== null)); 
     };
 
     if (favorites.length > 0) {
       getFavoriteMovies();
     }
-  }, [favorites]); // favorites가 변경될 때마다 실행
+  }, [favorites]); 
 
   return (
-    <div className="container mx-auto px-4 py-10 min-h-screen">
-      <div className="flex items-center">
+    <div className="container mx-auto min-h-screen px-3 lg:px-0">
+      <div className="flex">
         <div></div>
       {favorites.length > 0 && (
-        <div className="flex my-5">
+        <div className="flex my-7">
           <ClearLocalStorageButton />
         </div>
       )}
       </div>
 
       {movies.length === 0 ? (
-        <p className="text-center text-lg text-gray-600">No favorites found.</p>
+        <p className="text-center text-lg text-gray-5">No favorites found.</p>
       ) : (
-        <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {movies.map((movie) => (
             <>
               <MovieCard movie={movie} />
