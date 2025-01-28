@@ -75,7 +75,7 @@ const FavoritePage = () => {
       </div>
 
       {movies.length === 0 ? (
-        <p className="text-center text-lg text-gray-5">No favorites found.</p>
+        <p className="text-center text-lg text-white/50 mt-10">No favorites found.</p>
       ) : (
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {movies.map((movie) => (
