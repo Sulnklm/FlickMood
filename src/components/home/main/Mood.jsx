@@ -18,8 +18,9 @@ function Mood() {
   const [error, setError] = useState(null);
 
   const scrollContainer = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0); // scroll position state
 
-  // drag scroll event handlers
+  // drag scroll event handler
   const handleMouseDown = (e) => {
     const container = scrollContainer.current;
     container.isMouseDown = true;
@@ -32,16 +33,16 @@ function Mood() {
     if (!container.isMouseDown) return;
     e.preventDefault();
     const x = e.pageX - container.offsetLeft;
-    const walk = (x - container.startX) * 1.5; 
+    const walk = (x - container.startX) * 1.5;
     container.scrollLeft = container.scrollLeftStart - walk;
   };
 
   const handleMouseUp = () => {
     const container = scrollContainer.current;
     container.isMouseDown = false;
+    setScrollPosition(container.scrollLeft); // store scroll position
   };
 
-  // 카테고리 버튼 클릭 시 API 호출
   const fetchMovies = async (category) => {
     setLoading(true);
     setError(null);
@@ -50,7 +51,7 @@ function Mood() {
       const response = await axios.get(`${BASE_URL}/discover/movie`, {
         params: {
           api_key: API_KEY,
-          with_genres: category, // Genre Filtering
+          with_genres: category,
         },
       });
       setMovies(response.data.results);
@@ -62,7 +63,7 @@ function Mood() {
     }
   };
 
-  // 선택한 카테고리에 따라 영화 목록 업데이트
+  // 카테고리 선택 시 영화 데이터 로드
   useEffect(() => {
     if (selectedCategory) {
       fetchMovies(selectedCategory);
@@ -70,6 +71,13 @@ function Mood() {
       fetchMovies("35");
     }
   }, [selectedCategory]);
+
+  // restore scroll position
+  useEffect(() => {
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollLeft = scrollPosition;
+    }
+  }, [movies]); // restore scroll position when movies change
 
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -81,11 +89,11 @@ function Mood() {
   return (
     <div>
       <div className="container mx-auto">
-        <h1 className="mb-7 pl-5 pt-7 xl:pl-0 xl:pt-0">Pick Your Mood!</h1>
-        {/* Category Buttons with Drag Scroll */}
+        <h1 className="mb-6 pl-5 pt-7 xl:pl-0 xl:pt-0">Pick Your Mood!</h1>
+        {/* Category btn */}
         <div
           ref={scrollContainer}
-          className="pl-3 xl:pl-0 flex gap-3 overflow-x-auto scrollbar-hide items-center mb-8"
+          className="pl-3 xl:pl-0 flex gap-3 overflow-x-auto scrollbar-hide items-center mb-7"
           style={{
             cursor: "grab",
             userSelect: "none",
@@ -99,7 +107,7 @@ function Mood() {
           {categories.map((category) => (
             <p
               key={category.id}
-              className={`cursor-pointer font-[400] text-center whitespace-nowrap py-2 px-4 rounded-full transition-all duration-300 ${
+              className={`cursor-pointer font-[450] text-center whitespace-nowrap py-2.5 px-4 rounded-full transition-all duration-300 ${
                 selectedCategory === category.id
                   ? "bg-customGreenLight brightness-125 text-customMint"
                   : "bg-customGreenLight text-white/40"
@@ -111,7 +119,6 @@ function Mood() {
           ))}
         </div>
 
-        {/* Movie Swiper */}
         <Swiper
           grabCursor={true}
           centeredSlides={true}
