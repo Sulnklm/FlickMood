@@ -40,25 +40,25 @@ function MovieCard({ movie }) {
           className="absolute inset-0 w-full h-full object-cover z-0"
           src={posterUrl}
           alt={movie.title}
-          loading="lazy" 
+          loading="lazy"
         />
 
         {/* Gradient Overlay */}
         <div
           className="absolute inset-0 z-10"
           style={{
-            background: `linear-gradient(to bottom, #041219 0%, rgba(30, 43, 49, 0.7) 7%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 60%, rgba(30, 43, 49, 0.8) 75%, #041219 88%)`,
+            background: `linear-gradient(to bottom, #041219 0%, rgba(30, 43, 49, 0.7) 7%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0) 60%, rgba(30, 43, 49, 0.8) 77%, #041219 88%)`,
           }}
         ></div>
 
         {/* Content (Text, Buttons) */}
-        <div className="absolute inset-0 z-20 p-4 flex flex-col justify-between">
+        <div className="absolute inset-0 z-20 p-3.5 flex flex-col justify-between">
           {/* Movie Ranking */}
           <div>{""}</div>
 
           {/* Movie Title and Genres */}
           <div>
-            <h3 className="text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[100%]">
+            <h3 className="text-white font-[450] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100%]">
               {movie.title}
             </h3>
             <p className="text-white/60 text-ellipsis overflow-hidden whitespace-nowrap max-w-[100%]">
@@ -71,8 +71,8 @@ function MovieCard({ movie }) {
           </div>
         </div>
       </Link>
-      
-      <div className="absolute top-0 right-0 m-3 z-30">
+
+      <div className="absolute top-0 right-0 m-2.5 z-30">
         <RatingBox rating={movie.vote_average.toFixed(1)} />
       </div>
     </div>
