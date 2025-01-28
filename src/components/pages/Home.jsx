@@ -13,7 +13,7 @@ function Home() {
           <Sidebar />
         </div>
         <div className="xl:col-span-3 space-y-5 xl:order-2 lg:mt-5 xl:mr-5 xl:mx-0">
-          <div className="hidden lg:block">
+          <div className="hidden lg:block mx-3 xl:mx-0">
             <SearchBox />
           </div>
           <Main />
