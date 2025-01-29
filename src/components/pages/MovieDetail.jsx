@@ -162,12 +162,12 @@ const MovieDetail = () => {
     setIsFavorite(savedFavorites.includes(movieId));
   }, [movieId]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="text-white/50 justify-self-center mt-10 min-h-screen">Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <div className="2xl:max-w-[80vw] container mx-auto mt-5">
-      <div className="container mx-auto">
+      <div>
         {movieDetails && (
           <div>
             <div className="lg:flex items-center space-y-5 gap-5">
