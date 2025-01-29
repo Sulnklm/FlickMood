@@ -162,7 +162,7 @@ const MovieDetail = () => {
     setIsFavorite(savedFavorites.includes(movieId));
   }, [movieId]);
 
-  if (loading) return <div className="text-white/50 justify-self-center mt-10 min-h-screen">Loading...</div>;
+  if (loading) return <div className="text-white/50 justify-self-center mt-10 min-h-screen">{""}</div>;
   if (error) return <div>{error}</div>;
 
   return (
