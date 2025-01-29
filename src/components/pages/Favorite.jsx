@@ -26,7 +26,6 @@ const FavoritePage = () => {
 
   const fetchMovieDetails = async (movieId) => {
     if (!movieId || movieId === "null") {
-      // console.log("Invalid movie ID:", movieId); 
       return null;
     }
 
@@ -63,15 +62,20 @@ const FavoritePage = () => {
     }
   }, [favorites]); 
 
+  // 페이지 진입 시 스크롤을 맨 위로 초기화
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="container mx-auto min-h-screen px-3 lg:px-0">
       <div className="flex">
         <div></div>
-      {favorites.length > 0 && (
-        <div className="flex my-7">
-          <ClearLocalStorageButton />
-        </div>
-      )}
+        {favorites.length > 0 && (
+          <div className="flex my-7">
+            <ClearLocalStorageButton />
+          </div>
+        )}
       </div>
 
       {movies.length === 0 ? (
@@ -81,12 +85,10 @@ const FavoritePage = () => {
           {movies.map((movie) => (
             <>
               <MovieCard movie={movie} />
-              </>
+            </>
           ))}
         </ul>
       )}
-
-     
     </div>
   );
 };
