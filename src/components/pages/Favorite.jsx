@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import ClearLocalStorageButton from "../elements/ClearLocalStorageButton";
 import MovieCard from "../elements/MovieCard";
@@ -8,14 +7,11 @@ const API_KEY = "0e16d9b4af07e316bb36fc1286684dd6";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 const FavoritePage = () => {
+  // Load favorite movie IDs from localStorage
   const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (!storedFavorites) return [];
     try {
-      const parsedFavorites = JSON.parse(storedFavorites);
-      return Array.isArray(parsedFavorites)
-        ? parsedFavorites.filter((id) => id !== null && id !== undefined) // null 제거
-        : [];
+      const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+      return Array.isArray(storedFavorites) ? storedFavorites.filter(Boolean) : [];
     } catch (error) {
       console.error("Failed to parse favorites:", error);
       return [];
@@ -24,68 +20,58 @@ const FavoritePage = () => {
 
   const [movies, setMovies] = useState([]);
 
+  // Fetch movie details from API
   const fetchMovieDetails = async (movieId) => {
-    if (!movieId || movieId === "null") {
-      return null;
-    }
+    if (!movieId) return null;
 
     try {
-      console.log("Fetching details for Movie ID:", movieId);
       const response = await axios.get(`${BASE_URL}/movie/${movieId}`, {
         params: { api_key: API_KEY },
       });
-      return response.data;
+
+      const movieData = response.data;
+
+      if (!movieData.genre_ids && movieData.genres) {
+        movieData.genre_ids = movieData.genres.map((genre) => genre.id);
+      }
+
+      return movieData;
     } catch (error) {
       console.error("Failed to fetch movie details:", error);
       return null;
     }
   };
 
-  const addToFavorites = (movieId) => {
-    const updatedFavorites = favorites.filter((id) => id !== movieId); // 중복 제거
-    updatedFavorites.push(movieId); // 항상 끝에 추가
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-  };
-
   useEffect(() => {
     const getFavoriteMovies = async () => {
-      const validFavorites = favorites.filter((id) => id !== null && id !== undefined);
-      const movieDetails = await Promise.all(
-        validFavorites.map((movieId) => fetchMovieDetails(movieId))
-      );
-      setMovies(movieDetails.filter((movie) => movie !== null)); 
+      const movieDetails = await Promise.all(favorites.map(fetchMovieDetails));
+      setMovies(movieDetails.filter(Boolean)); // Remove null values
     };
 
     if (favorites.length > 0) {
       getFavoriteMovies();
     }
-  }, [favorites]); 
+  }, [favorites]);
 
-  // 페이지 진입 시 스크롤을 맨 위로 초기화
+  // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="container mx-auto min-h-screen px-3 lg:px-0">
-      <div className="flex">
-        <div></div>
-        {favorites.length > 0 && (
-          <div className="flex my-7">
-            <ClearLocalStorageButton />
-          </div>
-        )}
-      </div>
+      {favorites.length > 0 && (
+        <div className="flex my-7">
+          <ClearLocalStorageButton />
+        </div>
+      )}
 
       {movies.length === 0 ? (
         <p className="text-center text-lg text-white/50 mt-10">No favorites found.</p>
       ) : (
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {movies.map((movie) => (
-            <>
-              <MovieCard movie={movie} />
-            </>
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </ul>
       )}
