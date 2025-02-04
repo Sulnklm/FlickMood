@@ -2,6 +2,8 @@
 
 FlickMood is a movie information and discovery web app that not only provides traditional features like trending and new release movie lists but also introduces a unique and fun way to explore movies based on moods. The app is designed to make movie selection enjoyable and personalized for users, offering detailed movie information and creative filtering options.
 
+![FlickMood Preview](public/image/flickmood-demo.jpg)
+
 ## 🚀 Features
 
 ### 🎭 Mood-Based Filtering
